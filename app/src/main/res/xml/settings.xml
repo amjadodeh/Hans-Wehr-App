@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <PreferenceCategory android:title="Settings" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Search">
         <Preference
-            android:summary="Restores any purchases you may have made on your Google account on other devices to this device"
-            android:title="Restore Previous Purchases"
-            android:key="restore_purchases_pref"/>
-        <Preference android:summary="Clears images stored using the local cache (memory) of your phone"
-            android:title="Clear Image Cache"
-            android:key="clear_cache_pref"/>
-        <Preference android:summary="Clears the users search history stored on the device"
-            android:title="Clear Search History"
-            android:key="clear_search_history_pref"/>
-        <CheckBoxPreference android:summary="Enable offline mode so the app can work without an internet connection"
-            android:title="Enable offline mode"
-            android:key="offline_mode_pref"
-            android:defaultValue="false"/>
+            app:key="clear_search_history_pref"
+            app:summary="Removes the recent searches shown under the search box"
+            app:title="Clear search history" />
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="About">
+        <Preference
+            app:key="version_pref"
+            app:selectable="false"
+            app:title="Version" />
+        <Preference
+            app:key="source_pref"
+            app:summary="github.com/amjadodeh/Hans-Wehr-App"
+            app:title="Source code">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/amjadodeh/Hans-Wehr-App" />
+        </Preference>
+    </PreferenceCategory>
+
 </PreferenceScreen>

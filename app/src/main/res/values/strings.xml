@@ -1,41 +1,66 @@
 <resources>
     <string name="app_name">Hans Wehr</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_download">Hans Wehr</string>
-    <string name="banner_ad_unit_id">ca-app-pub-8841765102895133/4230246801/</string>
-    <string name="test_ad">ca-app-pub-3940256099942544/6300978111</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="verb_forms">\n Form I – فعل (fa3ala) \n Form II – فعّل (fa33ala)\n Form III – فاعل (faa3ala)\n
-    Form IV – أفعل (af3ala) \n Form V – تفعّل (tafa33ala) \n Form VI – تفاعل (tafaa3ala) \n Form VII – انفعل (infa3ala) \n
-    Form VIII – افتعل (ifta3ala) \n Form IX – افعلّ (if3alla) \n Form X – استفعل (istaf3ala)\n</string>
+    <string name="search_title">Search using root letters</string>
+    <string name="search_hint">Root letters, e.g. ktb or كتب</string>
+    <string name="page_of">Page %1$d of %2$d</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="no_browser">No web browser found</string>
+    <string name="search_history_cleared">Search history cleared</string>
+    <string name="feedback_url" translatable="false">https://github.com/amjadodeh/Hans-Wehr-App/issues</string>
+
+    <string-array name="drawer_titles">
+        <item>Verb Forms</item>
+        <item>Roman Arabic Letters</item>
+        <item>Tutorial</item>
+        <item>About</item>
+        <item>Settings</item>
+        <item>Help and Feedback</item>
+    </string-array>
+
+    <string name="title_verb_forms">Verb Forms</string>
+    <string name="title_roman_letters">Roman Arabic Letters</string>
+    <string name="title_tutorial">Tutorial</string>
+    <string name="title_about">About</string>
+
+    <string name="verb_forms"><![CDATA[
+        Form I – فعل (fa3ala)<br>
+        Form II – فعّل (fa33ala)<br>
+        Form III – فاعل (faa3ala)<br>
+        Form IV – أفعل (af3ala)<br>
+        Form V – تفعّل (tafa33ala)<br>
+        Form VI – تفاعل (tafaa3ala)<br>
+        Form VII – انفعل (infa3ala)<br>
+        Form VIII – افتعل (ifta3ala)<br>
+        Form IX – افعلّ (if3alla)<br>
+        Form X – استفعل (istaf3ala)
+    ]]></string>
+
+    <string name="roman_letters"><![CDATA[
+        <b>Double letters:</b><br>
+        th / v / V = ث &nbsp; gh / g / G = غ &nbsp; kh / x / X = خ &nbsp; sh / $ = ش &nbsp; dh = ذ<br><br>
+        <b>Different cases:</b><br>
+        d = د &nbsp; D = ض &nbsp; t = ت &nbsp; T = ط &nbsp; z = ز &nbsp; Z = ظ &nbsp; h = ه &nbsp; H = ح &nbsp; s = س &nbsp; S = ص<br><br>
+        <b>All other letters:</b><br>
+        a / A = ا &nbsp; b / B = ب &nbsp; j / J = ج &nbsp; 7 = ح &nbsp; r / R = ر &nbsp; e / E / 3 = ع &nbsp; f / F = ف<br>
+        q / Q = ق &nbsp; k / K = ك &nbsp; l / L = ل &nbsp; m / M = م &nbsp; n / N = ن &nbsp; w / W = و &nbsp; y / Y = ي
+    ]]></string>
+
+    <string name="tutorial"><![CDATA[
+        To look up a word, tap the search icon and enter the <b>root letters</b> of the word in Arabic
+        or in Roman Arabic (see “Roman Arabic Letters” for the mapping). The dictionary opens at the
+        page where that root begins.<br><br>
+        Swipe left and right to turn pages. Pinch or double-tap to zoom, and drag to pan.<br><br>
+        The whole dictionary is stored inside the app, so it works without an internet connection.
+    ]]></string>
+
     <string name="about"><![CDATA[
-    This app has been put together to help students of the Arabic language. Instead of having to carry around a bulky dictionary,
-        you can now access the same information at the luxury of your fingertips. If you\'ve benefited from this app
-        then please share it with you friends, leave a review, consider donating to support development or like our <a href="http://facebook.com/hanswehrapp">Facebook page</a> ]]>
-    </string>
-    <string name="app_version_name">3.0.4</string>
-    <string name="roman_letters">
-        <![CDATA[
-        <b>Double letters:</b><br><br>
-		th/v/V = "ث" \t gh/g/G = "غ" \t kh/x/X = "خ" \t sh/$ = "ش" \t dh = "ذ" <br>
-		<br>
-		<b>Different cases:</b><br><br>
-		d = "د" \t t = "ت" \t D = "ض" \t T = "ط" \t z = "ز" \t h = "ه" \t Z = "ظ" \t H = "ح"
-		 \t s = "س" \t  S = "ص"<br>
-		<br>
-		<b>All other "normal" letters:</b><br><br>
-		a/A = "ا" \t q/Q   = "ق"
-		\t b/B = "ب" \t k/K   = "ك"
-		\t j/J = "ج" \t l/L   = "ل"
-		\t No.7 = "ح" \t m/M = "م"
-		\t r/R = "ر" \t n/N   = "ن"
-		\t w/W = "و" \t y/Y   = "ي"
-		\t f/F = "ف" \t e/E/3 = "ع"<br> ]]>
-    </string>
-    <string name="tutorial">To search for a word please click on the search icon and enter the root letters
-        of the word you would like to search for in Arabic or Roman Arabic. To navigate the dictionary, swipe left and right to turn pages. To zoom into the image pinch or double tap the screen and pan the image by swiping in the desired direction.</string>
-    <string name="nointernet">This app requires an internet connection to load the image files. Please connect to the internet for the image files to be loaded properly or enable offline mode in the settings.</string>
+        A pocket edition of the Hans Wehr <i>Dictionary of Modern Written Arabic</i> (4th edition)
+        for students of Arabic: the scanned pages of the dictionary, searchable by root.<br><br>
+        Originally created by Uwais Iqbal. This version is maintained independently, is free of
+        advertising and in-app purchases, and needs no network access.<br><br>
+        Source code and updates: <a href="https://github.com/amjadodeh/Hans-Wehr-App">github.com/amjadodeh/Hans-Wehr-App</a>
+    ]]></string>
 </resources>
