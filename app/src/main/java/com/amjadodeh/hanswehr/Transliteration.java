@@ -6,9 +6,21 @@ public final class Transliteration {
     private Transliteration() {
     }
 
+    /**
+     * Converts a query to Arabic. A space, hyphen, apostrophe or dot between letters forces a
+     * split, so "s-h-r" is س ه ر while "shr" is ش ر.
+     */
     public static String toArabic(String query) {
-        // Roots are written without spaces; tolerate "k t b" style input.
-        String q = query.replaceAll("\\s+", "");
+        StringBuilder out = new StringBuilder();
+        for (String chunk : query.trim().split("[\\s\\-'.\u2019\u0640]+")) {
+            if (!chunk.isEmpty()) {
+                out.append(convertChunk(chunk));
+            }
+        }
+        return out.toString();
+    }
+
+    private static String convertChunk(String q) {
         // Normalise hamza / alif variants and alif maqsura to the plain forms used by the index.
         q = q.replaceAll("[إآٱأءﺀﺁﺃﺅﺇﺉ]", "ا");
         q = q.replaceAll("[ﻯى]", "ي");

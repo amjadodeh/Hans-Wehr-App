@@ -45,20 +45,25 @@
         d = د &nbsp; D = ض &nbsp; t = ت &nbsp; T = ط &nbsp; z = ز &nbsp; Z = ظ &nbsp; h = ه &nbsp; H = ح &nbsp; s = س &nbsp; S = ص<br><br>
         <b>All other letters:</b><br>
         a / A = ا &nbsp; b / B = ب &nbsp; j / J = ج &nbsp; 7 = ح &nbsp; r / R = ر &nbsp; e / E / 3 = ع &nbsp; f / F = ف<br>
-        q / Q = ق &nbsp; k / K = ك &nbsp; l / L = ل &nbsp; m / M = م &nbsp; n / N = ن &nbsp; w / W = و &nbsp; y / Y = ي
+        q / Q = ق &nbsp; k / K = ك &nbsp; l / L = ل &nbsp; m / M = م &nbsp; n / N = ن &nbsp; w / W = و &nbsp; y / Y = ي<br><br>
+        <b>Separate letters:</b><br>
+        Two-letter spellings always win, so <i>shr</i> is ش ر. To keep letters apart, put a hyphen or space
+        between them: <i>s-h-r</i> is س ه ر.
     ]]></string>
 
     <string name="tutorial"><![CDATA[
         To look up a word, tap the search icon and enter the <b>root letters</b> of the word in Arabic
-        or in Roman Arabic (see “Roman Arabic Letters” for the mapping). The dictionary opens at the
-        page where that root begins.<br><br>
+        (كتب) or in Roman Arabic (ktb; see “Roman Arabic Letters” for the mapping). The dictionary
+        opens at the page where that root begins.<br><br>
+        <i>th, kh, sh, gh</i> and <i>dh</i> stand for one letter each. If two of those letters really are
+        separate (as in س‑ه‑ر), write them with a hyphen: <i>s-h-r</i>.<br><br>
         Swipe left and right to turn pages. Pinch or double-tap to zoom, and drag to pan.<br><br>
         The whole dictionary is stored inside the app, so it works without an internet connection.
     ]]></string>
 
     <string name="about"><![CDATA[
         A pocket edition of the Hans Wehr <i>Dictionary of Modern Written Arabic</i> (4th edition)
-        for students of Arabic: the scanned pages of the dictionary, searchable by root.<br><br>
+        for students of Arabic: the scanned pages of the dictionary, with search by root letters.<br><br>
         Originally created by Uwais Iqbal. This version is maintained independently, is free of
         advertising and in-app purchases, and needs no network access.<br><br>
         Source code and updates: <a href="https://github.com/amjadodeh/Hans-Wehr-App">github.com/amjadodeh/Hans-Wehr-App</a>

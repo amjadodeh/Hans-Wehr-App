@@ -1,7 +1,7 @@
 # Hans Wehr
 
 An Android app containing the scanned pages of the Hans Wehr *Dictionary of Modern
-Written Arabic* (4th edition), searchable by root letters. The entire dictionary is
+Written Arabic* (4th edition), with search by root letters. The entire dictionary is
 bundled inside the app, so it works completely offline and needs no permissions.
 
 Version 4.0 is a modernised, ad-free rebuild of the original app by Uwais Iqbal.
@@ -23,6 +23,9 @@ alongside the old Play Store version instead of replacing it.
 
 - Tap the search icon and type the root letters of a word, in Arabic (`كتب`) or in
   Roman Arabic (`ktb`). The dictionary opens on the page where that root begins.
+- `th`, `kh`, `sh`, `gh` and `dh` each stand for one Arabic letter (ث خ ش غ ذ). When two
+  such letters are genuinely separate, put a hyphen or space between them: `s-h-r` is
+  س‑ه‑ر, while `shr` is ش‑ر. The full letter table is in the app's side menu.
 - Swipe left and right to turn pages. Pinch or double-tap to zoom; drag to pan.
 - The side menu has the verb-form table, the Roman-letter mapping, a tutorial, and
   settings. The app remembers the last page you were on.
