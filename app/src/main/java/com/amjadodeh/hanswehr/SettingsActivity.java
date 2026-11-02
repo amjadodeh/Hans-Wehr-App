@@ -1,5 +1,6 @@
 package com.amjadodeh.hanswehr;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
@@ -15,6 +16,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.bumptech.glide.Glide;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -52,6 +55,17 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings, rootKey);
+
+            Preference clearCache = findPreference("clear_cache_pref");
+            if (clearCache != null) {
+                clearCache.setOnPreferenceClickListener(preference -> {
+                    final Context app = requireContext().getApplicationContext();
+                    Glide.get(app).clearMemory();
+                    new Thread(() -> Glide.get(app).clearDiskCache()).start();
+                    Toast.makeText(app, R.string.cache_cleared, Toast.LENGTH_SHORT).show();
+                    return true;
+                });
+            }
 
             Preference clearHistory = findPreference("clear_search_history_pref");
             if (clearHistory != null) {

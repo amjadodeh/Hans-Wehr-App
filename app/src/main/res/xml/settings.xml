@@ -2,11 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Search">
+    <PreferenceCategory app:title="Settings">
+        <Preference
+            app:key="clear_cache_pref"
+            app:summary="Clears images stored using the local cache (memory) of your phone"
+            app:title="Clear Image Cache" />
         <Preference
             app:key="clear_search_history_pref"
-            app:summary="Removes the recent searches shown under the search box"
-            app:title="Clear search history" />
+            app:summary="Clears the users search history stored on the device"
+            app:title="Clear Search History" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="About">

@@ -21,14 +21,15 @@ alongside the old Play Store version instead of replacing it.
 
 ## Usage
 
-- Tap the search icon and type the root letters of a word, in Arabic (`كتب`) or in
+- Tap the search icon, or tap once on any page, and type the root letters of a word, in Arabic (`كتب`) or in
   Roman Arabic (`ktb`). The dictionary opens on the page where that root begins.
 - `th`, `kh`, `sh`, `gh` and `dh` each stand for one Arabic letter (ث خ ش غ ذ). When two
   such letters are genuinely separate, put a hyphen or space between them: `s-h-r` is
   س‑ه‑ر, while `shr` is ش‑ر. The full letter table is in the app's side menu.
 - Swipe left and right to turn pages. Pinch or double-tap to zoom; drag to pan.
-- The side menu has the verb-form table, the Roman-letter mapping, a tutorial, and
-  settings. The app remembers the last page you were on.
+- The side menu has the verb-form table, the Roman-letter mapping, a tutorial, About,
+  Settings, Help and Feedback (opens the project's issue tracker) and Rate Us (opens the
+  Releases page). The app always opens on page 1, as the original did.
 
 ## What changed in 4.0
 
@@ -37,8 +38,8 @@ alongside the old Play Store version instead of replacing it.
 - Dictionary pages are shipped inside the APK instead of being downloaded from a
   third-party Firebase project. No internet access, no storage permission.
 - Ads, in-app purchases, Firebase analytics and search logging are gone.
-- Handles edge-to-edge display on Android 15+, dark theme, and the Android 11+
-  scoped-storage rules.
+- Handles edge-to-edge display on Android 15+ and the Android 11+ scoped-storage rules.
+  Keeps the original dark look.
 
 ## Building
 

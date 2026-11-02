@@ -4,20 +4,24 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="search_title">Search using root letters</string>
-    <string name="search_hint">Root letters, e.g. ktb or كتب</string>
+    <string name="search_hint">Search using root letters e.g f3l ...</string>
     <string name="page_of">Page %1$d of %2$d</string>
     <string name="dismiss">Dismiss</string>
     <string name="no_browser">No web browser found</string>
-    <string name="search_history_cleared">Search history cleared</string>
+    <string name="search_history_cleared">Search history successfully cleared</string>
+    <string name="cache_cleared">Cache successfully cleared</string>
+    <string name="press_back_again">Press back again to exit the app</string>
+    <string name="releases_url" translatable="false">https://github.com/amjadodeh/Hans-Wehr-App/releases</string>
     <string name="feedback_url" translatable="false">https://github.com/amjadodeh/Hans-Wehr-App/issues</string>
 
     <string-array name="drawer_titles">
         <item>Verb Forms</item>
         <item>Roman Arabic Letters</item>
         <item>Tutorial</item>
-        <item>About</item>
+        <item>About Us</item>
         <item>Settings</item>
         <item>Help and Feedback</item>
+        <item>Rate Us</item>
     </string-array>
 
     <string name="title_verb_forms">Verb Forms</string>
@@ -52,12 +56,12 @@
     ]]></string>
 
     <string name="tutorial"><![CDATA[
-        To look up a word, tap the search icon and enter the <b>root letters</b> of the word in Arabic
-        (كتب) or in Roman Arabic (ktb; see “Roman Arabic Letters” for the mapping). The dictionary
-        opens at the page where that root begins.<br><br>
+        To search for a word please click on the search icon (or tap once on a page) and enter the root letters
+        of the word you would like to search for in Arabic or Roman Arabic. To navigate the dictionary, swipe left
+        and right to turn pages. To zoom into the image pinch or double tap the screen and pan the image by swiping
+        in the desired direction.<br><br>
         <i>th, kh, sh, gh</i> and <i>dh</i> stand for one letter each. If two of those letters really are
         separate (as in س‑ه‑ر), write them with a hyphen: <i>s-h-r</i>.<br><br>
-        Swipe left and right to turn pages. Pinch or double-tap to zoom, and drag to pan.<br><br>
         The whole dictionary is stored inside the app, so it works without an internet connection.
     ]]></string>
 

@@ -16,10 +16,17 @@ import com.github.chrisbanes.photoview.PhotoView;
 /** Shows one bundled dictionary page per pager position. */
 public class PageAdapter extends PagerAdapter {
 
-    private final PageIndex index;
+    /** Called when the user taps a page once (double taps zoom, as before). */
+    public interface OnPageTapListener {
+        void onPageTap();
+    }
 
-    public PageAdapter(PageIndex index) {
+    private final PageIndex index;
+    private final OnPageTapListener tapListener;
+
+    public PageAdapter(PageIndex index, OnPageTapListener tapListener) {
         this.index = index;
+        this.tapListener = tapListener;
     }
 
     @NonNull
@@ -27,6 +34,7 @@ public class PageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View page = LayoutInflater.from(container.getContext()).inflate(R.layout.page, container, false);
         PhotoView photoView = page.findViewById(R.id.pageImage);
+        photoView.setOnViewTapListener((view, x, y) -> tapListener.onPageTap());
         Uri uri = Uri.parse("file:///android_asset/" + PageIndex.assetPathForPosition(position));
         Glide.with(container.getContext())
                 .load(uri)

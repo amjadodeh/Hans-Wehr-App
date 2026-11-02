@@ -4,10 +4,10 @@ import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.text.method.LinkMovementMethod;
@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.SystemBarStyle;
@@ -36,7 +38,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String PREF_LAST_PAGE = "last_page";
     private static final String STATE_PAGE = "page";
 
     private PageIndex pageIndex;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
     private SearchView searchView;
+    /** Android 13+: takes priority over DrawerLayout's own back handling while the drawer is open. */
+    private OnBackInvokedCallback drawerBackCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         pageIndex = new PageIndex(this);
 
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setLogo(R.mipmap.ic_launcher_book);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.viewPagerMain);
@@ -85,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupPager(Bundle savedInstanceState) {
-        viewPager.setAdapter(new PageAdapter(pageIndex));
+        viewPager.setAdapter(new PageAdapter(pageIndex, this::openSearch));
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         viewPager.setOffscreenPageLimit(1);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -94,13 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 updateSubtitle(position);
             }
         });
-        int startPage;
-        if (savedInstanceState != null) {
-            startPage = savedInstanceState.getInt(STATE_PAGE, 0);
-        } else {
-            startPage = prefs().getInt(PREF_LAST_PAGE, 0);
-        }
-        showPage(startPage);
+        // Like the original app: every launch starts on page 1; rotation keeps the current page.
+        int startPage = savedInstanceState != null ? savedInstanceState.getInt(STATE_PAGE, 0) : 0;
+        showPage(startPage, false);
     }
 
     private void setupDrawer(ListView drawerList) {
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_info_white_24dp,
                 R.drawable.ic_settings_applications_white_24dp,
                 R.drawable.ic_announcement_white_24dp,
+                R.drawable.ic_thumb_up_white_24dp,
         };
         drawerList.setAdapter(new DrawerRowAdapter(this, titles, icons));
         drawerList.setOnItemClickListener((parent, view, position, id) -> {
@@ -127,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
                 if (searchView != null) {
                     searchView.clearFocus();
                 }
+                registerDrawerBackCallback();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                unregisterDrawerBackCallback();
             }
         };
         drawerLayout.addDrawerListener(drawerToggle);
@@ -134,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    closeDrawerFromBack();
                 } else if (searchView != null && !searchView.isIconified()) {
                     searchView.onActionViewCollapsed();
                 } else {
@@ -143,6 +151,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /** Back with the drawer open: close it and show the original app's hint. */
+    private void closeDrawerFromBack() {
+        drawerLayout.closeDrawer(GravityCompat.START);
+        Toast.makeText(getApplicationContext(), R.string.press_back_again, Toast.LENGTH_SHORT).show();
+    }
+
+    private void registerDrawerBackCallback() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || drawerBackCallback != null) {
+            return;
+        }
+        drawerBackCallback = this::closeDrawerFromBack;
+        // DrawerLayout registers its own callback at PRIORITY_OVERLAY; one notch higher wins.
+        getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_OVERLAY + 1, drawerBackCallback);
+    }
+
+    private void unregisterDrawerBackCallback() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && drawerBackCallback != null) {
+            getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(drawerBackCallback);
+            drawerBackCallback = null;
+        }
     }
 
     private void onDrawerItemSelected(int position) {
@@ -165,8 +196,19 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 openUrl(getString(R.string.feedback_url));
                 break;
+            case 6:
+                openUrl(getString(R.string.releases_url));
+                break;
             default:
                 break;
+        }
+    }
+
+    /** Expands the toolbar search box and focuses it (tap on a page, or the toolbar icon). */
+    private void openSearch() {
+        if (searchView != null) {
+            searchView.setIconified(false);
+            searchView.requestFocus();
         }
     }
 
@@ -206,18 +248,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         String root = Transliteration.toArabic(query);
-        showPage(pageIndex.positionForRoot(root));
+        // Animated like the original ViewPager.setCurrentItem(int); suggestions saved exactly as typed.
+        showPage(pageIndex.positionForRoot(root), true);
         new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE)
-                .saveRecentQuery(query.trim(), null);
+                .saveRecentQuery(query, null);
         if (searchView != null) {
             searchView.onActionViewCollapsed();
         }
         viewPager.requestFocus();
     }
 
-    private void showPage(int position) {
+    private void showPage(int position, boolean animate) {
         int clamped = Math.max(0, Math.min(position, pageIndex.getPageCount() - 1));
-        viewPager.setCurrentItem(clamped, false);
+        viewPager.setCurrentItem(clamped, animate);
         updateSubtitle(clamped);
     }
 
@@ -258,18 +301,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        unregisterDrawerBackCallback();
+        super.onDestroy();
+    }
+
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_PAGE, viewPager.getCurrentItem());
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        prefs().edit().putInt(PREF_LAST_PAGE, viewPager.getCurrentItem()).apply();
-    }
-
-    private SharedPreferences prefs() {
-        return getSharedPreferences("hanswehr", MODE_PRIVATE);
-    }
 }
